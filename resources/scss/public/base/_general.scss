@@ -1,0 +1,39 @@
+body{
+    font-family: $font-style-2;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: $font-style;
+}
+
+.btn-primary-app{
+    background-color: $primary-main;
+    color: $neutral-10;
+
+    &:active, &:focus, &:hover, &::before {
+        background-color: $primary-hover;
+        color: $neutral-10;
+    }
+}
+
+.btn-outline-primary-app{
+    border-color: $primary-main;
+    color: $primary-main;
+
+    &:active, &:focus, &:hover, &::before {
+        border-color: $primary-main;
+        background-color: $primary-main;
+        color: $neutral-10;
+    }
+}
+
+// buat class .card-product dan ketika dihover akan menampilkan border
+.card-product{
+    padding: 10px;
+    cursor: pointer;
+
+    &:hover{
+        border: 1px solid $gray-1 !important;
+        box-shadow: 0 0 10px 0 $gray-1;
+    }
+}

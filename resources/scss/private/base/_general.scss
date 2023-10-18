@@ -1,0 +1,92 @@
+body{
+    font-family: $font-style;
+    background-color: $bg-main;
+}
+
+.btn-primary-app{
+    background-color: $primary-main;
+    color: $neutral-10;
+
+    &:active, &:focus, &:hover, &::before {
+        background-color: $primary-hover;
+        color: $neutral-10;
+    }
+}
+
+.btn-outline-primary-app{
+    border-color: $primary-main;
+    color: $primary-main;
+
+    &:active, &:focus, &:hover, &::before {
+        border-color: $primary-main;
+        background-color: $primary-main;
+        color: $neutral-10;
+    }
+}
+
+// buat class .card-product dan ketika dihover akan menampilkan border
+.card-product{
+    padding: 10px;
+    cursor: pointer;
+
+    &:hover{
+        border: 1px solid $gray-1 !important;
+    }
+}
+
+// table
+.table {
+    font-style: $font-style-2;
+    vertical-align: middle;
+
+    thead {
+        th {
+            font-weight: 500 !important;
+            font-size: 12px;
+            line-height: 150%;
+            color: $neutral-90;
+        }
+    }
+
+    tbody {
+        .avatar {
+            img{
+                padding: 0px;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+            }
+            span{
+                color: $blue-4;
+            }
+        }
+
+        td.fw-medium {
+            font-size: 16px;
+            color: $neutral-90;
+        }
+
+        td {
+            color: $neutral-70;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 150%;
+        }
+    }
+
+    td, th {
+        padding: 13px 24px;
+    }
+}
+
+.table-blue{
+    thead {
+        th {
+            background-color: $primary-main;
+            font-weight: 500 !important;
+            font-size: 12px;
+            line-height: 150%;
+            color: $neutral-10;
+        }
+    }
+}

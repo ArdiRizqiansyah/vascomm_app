@@ -1,0 +1,50 @@
+// font-color
+.text-primary-app {
+  color: $primary-main;
+}
+
+.text-red-app {
+  color: $red-1;
+}
+
+// background-color
+.bg-blue-app {
+  background-color: $blue-1;
+}
+
+.bg-blue-gradient-app {
+  background: linear-gradient(90deg, $blue-2 0%, $blue-3 100%);
+}
+
+// font size
+.text-xs{
+  font-size: 12px
+}
+
+.text-sm{
+  font-size: 14px;
+}
+
+.text-md{
+  font-size: 16px;
+}
+
+.text-lg{
+  font-size: 20px;
+}
+
+.text-xl{
+  font-size: 24px;
+}
+
+.text-2xl{
+  font-size: 28px;
+}
+
+.text-3xl{
+  font-size: 32px;
+}
+
+.text-4xl{
+  font-size: 48px;
+}
