@@ -26,6 +26,7 @@ class UserSeeder extends Seeder
                 'name' => 'User',
                 'email' => 'user@gmail.com',
                 'email_verified_at' => now(),
+                'phone' => '08987654321',
                 'password' => 'user',
             ];
 
@@ -41,6 +42,7 @@ class UserSeeder extends Seeder
                     'name' => $faker->name,
                     'email' => $faker->email,
                     'email_verified_at' => now(),
+                    'phone' => $faker->phoneNumber,
                     'password' => 'user',
                 ]);
 

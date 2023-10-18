@@ -17,6 +17,7 @@ class AdminSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'email_verified_at' => now(),
+            'phone' => '081234567890',
             'password' => 'admin',
         ];
 
