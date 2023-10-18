@@ -11,11 +11,12 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements HasMedia
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, InteractsWithMedia;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, HasRoles, InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -60,11 +61,11 @@ class User extends Authenticatable implements HasMedia
     }
 
     // attributte
-    public function getPhotoAttribute($bg = "41A0E4", $color = "FFF")
+    public function getPhotoAttribute()
     {
         $buildQueryString = str_replace(' ', '+', $this->name);
         $mediaItems = $this->getFirstMediaUrl('avatar');
-        $imgDefault = "https://ui-avatars.com/api/?background=$bg&color=$color&name={$buildQueryString}";
+        $imgDefault = "https://ui-avatars.com/api/?background=41A0E4&color=FFF&name={$buildQueryString}";
 
         if ($mediaItems) {
             return $mediaItems;

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->double('price');
             $table->boolean('is_active')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

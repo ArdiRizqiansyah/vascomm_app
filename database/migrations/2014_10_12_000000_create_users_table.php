@@ -21,6 +21,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

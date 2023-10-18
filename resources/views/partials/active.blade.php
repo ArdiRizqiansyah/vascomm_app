@@ -21,7 +21,6 @@
                         'status': $(`#active-${id}`).is(':checked') ? 1 : 0,
                     },
                     success: function(data) {
-                        console.log(data);
                         if (data == 1) {
                             return Toast.fire({
                                 icon: 'success',

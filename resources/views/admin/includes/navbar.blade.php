@@ -7,19 +7,28 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        {{-- <img src="{{ auth()->user()->photo }}" class="rounded-circle" height="41px" width="41px" --}}
-                        <img src="{{ asset('assets/images/default-image.png') }}" class="rounded-circle" height="41px" width="41px"
+                        <img src="{{ auth()->user()->photo }}" class="rounded-circle" height="41px" width="41px"
                             alt="User Photo">
                         <i class="fas fa-chevron-down me-2"></i>
-                        {{-- Halo, {{ auth()->user()->name }} --}}
-                        Halo,
+                        Halo, {{ auth()->user()->name }}
                     </a>
                     <div class="dropdown-menu dropdown-menu-end position-absolute">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <a type="button" class="dropdown-item"
+                            <div class="text-center">
+                                <img src="{{ auth()->user()->photo }}" class="rounded-circle" height="41px" width="41px"
+                                alt="User Photo">
+                                <p class="text-lg mb-0">{{ auth()->user()->name }}</p>
+                                <p class="text-xs mb-0">{{ auth()->user()->email }}</p>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a type="button" class="dropdown-item text-center text-danger"
                                 onclick="event.preventDefault(); 
-                                    this.closest('form').submit();">{{ __('Log Out') }}</a>
+                                this.closest('form').submit();"
+                                >
+                                <i class="fas fa-power-off"></i>
+                                Keluar
+                            </a>
                         </form>
                     </div>
                 </li>
