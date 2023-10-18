@@ -1,6 +1,8 @@
 @extends('public.layouts.app')
 
 @section('content')
+    @include('partials.slick')
+
     <div class="container py-3">
         {{-- carousel --}}
         <div id="carouselExampleIndicators" class="carousel slide">
@@ -39,54 +41,26 @@
         {{-- latest product --}}
         <div class="my-3">
             <h5 class="text-xl fw-bold mb-3">Terbaru</h5>
-
-            <div class="row gap-5">
-                <div class="col-lg-2">
-                    <div class="card border-0 card-product">
-                        <img src="{{ asset('assets/images/product.png') }}" class="card-img-top" alt="Prouct Image">
-                        <div class="card-body">
-                            <h6 class="card-title fw-bold">Eudia</h6>
-                            <p class="card-text text-primary-app">IDR x.xx.980</p>
-                        </div>
-                    </div>
+            {{-- jika tidak ada $newProduct --}}
+            @if (!@$newProducts)
+                <div class="alert alert-info">
+                    Belum ada produk terbaru
                 </div>
-                <div class="col-lg-2">
-                    <div class="card border-0 card-product">
-                        <img src="{{ asset('assets/images/product.png') }}" class="card-img-top" alt="Prouct Image">
-                        <div class="card-body">
-                            <h6 class="card-title fw-bold">Eudia</h6>
-                            <p class="card-text text-primary-app">IDR x.xx.980</p>
+            @else
+                <div class="slider-multiple-items">
+                    @foreach ($newProducts as $newProduct)
+                        <div >
+                            <div class="card border-0 card-product">
+                                <img src="{{ $newProduct->image }}" class="card-img-top" alt="Prouct Image">
+                                <div class="card-body">
+                                    <h6 class="card-title fw-bold">{{ $newProduct->name }}</h6>
+                                    <p class="card-text text-primary-app">{{ $newProduct->formatIdrPrice }}</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
-                <div class="col-lg-2">
-                    <div class="card border-0 card-product">
-                        <img src="{{ asset('assets/images/product.png') }}" class="card-img-top" alt="Prouct Image">
-                        <div class="card-body">
-                            <h6 class="card-title fw-bold">Eudia</h6>
-                            <p class="card-text text-primary-app">IDR x.xx.980</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="card border-0 card-product">
-                        <img src="{{ asset('assets/images/product.png') }}" class="card-img-top" alt="Prouct Image">
-                        <div class="card-body">
-                            <h6 class="card-title fw-bold">Eudia</h6>
-                            <p class="card-text text-primary-app">IDR x.xx.980</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="card border-0 card-product">
-                        <img src="{{ asset('assets/images/product.png') }}" class="card-img-top" alt="Prouct Image">
-                        <div class="card-body">
-                            <h6 class="card-title fw-bold">Eudia</h6>
-                            <p class="card-text text-primary-app">IDR x.xx.980</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endif
         </div>
         {{-- end latest product --}}
 
@@ -94,60 +68,44 @@
         <div class="my-3">
             <h5 class="text-xl fw-bold mb-3">Produk Tersedia</h5>
 
-            <div class="row gap-5">
-                <div class="col-lg-2">
-                    <div class="card border-0 card-product">
-                        <img src="{{ asset('assets/images/product.png') }}" class="card-img-top" alt="Prouct Image">
-                        <div class="card-body">
-                            <h6 class="card-title fw-bold">Eudia</h6>
-                            <p class="card-text text-primary-app">IDR x.xx.980</p>
+            <div class="row gap-5" id="content-product">
+                @forelse ($products as $product)
+                    <div class="col-lg-2">
+                        <div class="card border-0 card-product">
+                            <img src="{{ $product->image }}" class="card-img-top" alt="Prouct Image">
+                            <div class="card-body">
+                                <h6 class="card-title fw-bold">{{ $product->name }}</h6>
+                                <p class="card-text text-primary-app">{{ $product->formatIdrPrice }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="card border-0 card-product">
-                        <img src="{{ asset('assets/images/product.png') }}" class="card-img-top" alt="Prouct Image">
-                        <div class="card-body">
-                            <h6 class="card-title fw-bold">Eudia</h6>
-                            <p class="card-text text-primary-app">IDR x.xx.980</p>
+                @empty
+                    <div class="col">
+                        <div class="alert alert-info">
+                            Belum ada produk tersedia
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="card border-0 card-product">
-                        <img src="{{ asset('assets/images/product.png') }}" class="card-img-top" alt="Prouct Image">
-                        <div class="card-body">
-                            <h6 class="card-title fw-bold">Eudia</h6>
-                            <p class="card-text text-primary-app">IDR x.xx.980</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="card border-0 card-product">
-                        <img src="{{ asset('assets/images/product.png') }}" class="card-img-top" alt="Prouct Image">
-                        <div class="card-body">
-                            <h6 class="card-title fw-bold">Eudia</h6>
-                            <p class="card-text text-primary-app">IDR x.xx.980</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="card border-0 card-product">
-                        <img src="{{ asset('assets/images/product.png') }}" class="card-img-top" alt="Prouct Image">
-                        <div class="card-body">
-                            <h6 class="card-title fw-bold">Eudia</h6>
-                            <p class="card-text text-primary-app">IDR x.xx.980</p>
-                        </div>
-                    </div>
-                </div>
+                @endforelse
             </div>
 
-            <div class="text-center mt-3">
-                <button type="button" class="btn btn-outline-primary-app">
-                    Lihat lebih banyak
-                </button>
+            <div class="my-3">
+                <x-paginate :paginate="$products" />
             </div>
         </div>
         {{-- end list product --}}
     </div>
+
+    @push('after-scripts')
+        <script>
+            $(document).ready(function() {
+                $('.slider-multiple-items').slick({
+                    infinite: true,
+                    // speed: 300,
+                    autoplay: true,
+                    slidesToShow: 5,
+                    slidesToScroll: 5,
+                });
+            });
+        </script>
+    @endpush
 @endsection

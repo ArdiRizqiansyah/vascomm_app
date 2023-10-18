@@ -40,4 +40,22 @@ class Product extends Model implements HasMedia
     {
         return 'Rp. ' . number_format($this->price, 0, ',', '.');
     }
+
+    public function getFormatIdrPriceAttribute()
+    {
+        return 'IDR '. number_format($this->price, 0, ',', '.');
+    }
+
+    // scope
+    public function scopeIsActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+    public function scopeFilter($query)
+    {
+        return $query->when(request('search'), function($query) {
+            $query->where('name', 'like', '%' . request('search') . '%');
+        });
+    }
 }

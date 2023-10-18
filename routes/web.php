@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\ActiveController as AdminActiveController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/load-product', [HomeController::class, 'loadProduct'])->name('load-product');
 
 // admin
 Route::group(

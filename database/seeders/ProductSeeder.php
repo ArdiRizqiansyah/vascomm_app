@@ -21,6 +21,7 @@ class ProductSeeder extends Seeder
                 Product::create([
                     'name' => $faker->word(),
                     'price' => $faker->numberBetween(10000, 100000),
+                    'is_active' => $faker->boolean(),
                 ]);
             }
         }

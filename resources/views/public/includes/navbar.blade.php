@@ -9,13 +9,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <div class="mx-md-auto mb-3 mb-md-0 w-50">
-                <div class="input-group flex-nowrap">
-                    <input type="text" class="form-control border-end-0 bg-light"
-                        placeholder="Cari parfum kesukaanmu">
-                    <span class="input-group-text bg-light border-start-0" id="addon-wrapping">
-                        <i class="fas fa-search text-muted"></i>
-                    </span>
-                </div>
+                <form action="" method="GET">
+                    <div class="input-group flex-nowrap">
+                        <input type="text" name="search" class="form-control border-end-0 bg-light"
+                            placeholder="Cari parfum kesukaanmu" value="{{ @$_GET['search'] }}">
+                        <span class="input-group-text bg-light border-start-0" id="addon-wrapping">
+                            <i class="fas fa-search text-muted"></i>
+                        </span>
+                    </div>
+                </form>
             </div>
             <ul class="navbar-nav fw-semibold gap-2">
                 @auth
