@@ -13,24 +13,28 @@
             <div class="col-md-1 d-none d-md-block"></div>
             <div class="col-md-4">
                 <div class="mb-3">
-                    <p class="text-2xl fw-bold mb-1">Selamat Datang</p>
+                    <p class="text-2xl fw-bold mb-1">Daftar Akun</p>
                     <p class="text-muted">
-                        Silahkan masukkan email atau nomor telepon dan password Anda untuk mulai menggunakan aplikasi
+                        Silahkan masukkan nama, email, dan nomor telepon Anda untuk mulai menggunakan aplikasi
                     </p>
                 </div>
-                <form action="{{ route('login') }}" method="POST">
+                <form action="{{ route('register') }}" method="POST">
                     @csrf
+                    <div class="mb-3">
+                        <label for="name" class="form-label text-muted">Nama</label>
+                        <x-inputs.text name="name" placeholder="Masukkan nama anda" />
+                    </div>
                     <div class="mb-3">
                         <label for="email" class="form-label text-muted">Email</label>
                         <x-inputs.text name="email" type="email" placeholder="Masukkan email anda" />
                     </div>
                     <div class="mb-3">
-                        <label for="password" class="form-label text-muted">Password</label>
-                        <x-inputs.password name="password" placholder="Masukkan password" />
+                        <label for="phone" class="form-label text-muted">No Telepon</label>
+                        <x-inputs.text name="phone" placeholder="Masukkan no telepon anda" />
                     </div>
                     <div class="d-grid mb-2">
                         <button type="submit" class="btn btn-primary-app py-2">
-                            Masuk
+                            Daftar
                         </button>
                     </div>
                 </form>

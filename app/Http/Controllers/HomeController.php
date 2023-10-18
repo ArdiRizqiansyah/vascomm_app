@@ -15,9 +15,4 @@ class HomeController extends Controller
 
         return view('public.pages.home', $data);
     }
-
-    public function login()
-    {
-        return view('auth.pages.login');
-    }
 }

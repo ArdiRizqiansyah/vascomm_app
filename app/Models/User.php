@@ -60,7 +60,7 @@ class User extends Authenticatable implements HasMedia
     }
 
     // attributte
-    public function getPhotoAttribute($bg = "052DA0", $color = "FFF")
+    public function getPhotoAttribute($bg = "41A0E4", $color = "FFF")
     {
         $buildQueryString = str_replace(' ', '+', $this->name);
         $mediaItems = $this->getFirstMediaUrl('avatar');

@@ -15,11 +15,7 @@
                         Halo,
                     </a>
                     <div class="dropdown-menu dropdown-menu-end position-absolute">
-                        <a class="dropdown-item" href="#!">Action</a>
-                        <a class="dropdown-item" href="#!">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        {{-- <form method="POST" action="{{ route('logout') }}"> --}}
-                        <form method="POST" action="#">
+                        <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <a type="button" class="dropdown-item"
                                 onclick="event.preventDefault(); 

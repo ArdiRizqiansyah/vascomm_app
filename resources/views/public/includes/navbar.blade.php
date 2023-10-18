@@ -17,16 +17,36 @@
                 </div>
             </div>
             <ul class="navbar-nav fw-semibold gap-2">
-                <li class="nav-item">
-                    <a href="{{ route('login') }}" class="btn btn-outline-primary-app">
-                        Masuk
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="btn btn-primary-app">
-                        Daftar
-                    </a>
-                </li>
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <img src="{{ auth()->user()->photo }}" class="rounded-circle" height="41px" width="41px" alt="User Photo">
+                            <i class="fas fa-chevron-down me-2"></i>
+                            Halo, {{ auth()->user()->name }}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end position-absolute">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <a type="button" class="dropdown-item"
+                                    onclick="event.preventDefault(); 
+                                        this.closest('form').submit();">{{ __('Log Out') }}</a>
+                            </form>
+                        </div>
+                    </li>
+                @endauth
+                @guest
+                    <li class="nav-item">
+                        <a href="{{ route('login') }}" class="btn btn-outline-primary-app">
+                            Masuk
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('register') }}" class="btn btn-primary-app">
+                            Daftar
+                        </a>
+                    </li>
+                @endguest
             </ul>
         </div>
     </div>

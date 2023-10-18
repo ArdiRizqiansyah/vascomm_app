@@ -23,13 +23,13 @@ use App\Http\Controllers\Admin\ActiveController as AdminActiveController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/login', [HomeController::class, 'login'])->name('login');
 
 // admin
 Route::group(
     [
         'prefix'     => 'admin',
         'as'         => 'admin.',
+        'middleware' => ['role:admin'],
     ],
     function() {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
@@ -41,3 +41,5 @@ Route::group(
     }
 );
 // end admin
+
+require __DIR__ . '/auth.php';
