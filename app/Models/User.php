@@ -73,4 +73,9 @@ class User extends Authenticatable implements HasMedia
             return $imgDefault;
         }
     }
+
+    public function getStatusLabelAttribute()
+    {
+        return $this->is_active ? 'Aktif' : 'Tidak Aktif';
+    }
 }

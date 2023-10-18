@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -14,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
         $data = [
-            // 'users' => User::latest()->paginate(10),
+            'users' => User::latest()->paginate(10),
         ];
 
         return view('admin.pages.user.index', $data);
@@ -36,15 +37,38 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'email|required|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
+            'phone' => 'nullable',
+            'is_active' => 'required|boolean',
         ]);
 
         try {
-            User::create($request->all());
+            DB::beginTransaction(); // begin transaction
 
-            return redirect()->route('admin.user.index')->with('success', 'User created successfully');
+            // simpan user
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone ?? null,
+                'is_active' => $request->is_active ?? false,
+                'password' => '12345678',
+            ]);
+
+            // simpan role
+            $user->assignRole('user');
+
+            DB::commit(); // commit transaction
+
+            flash()->addSuccess('Berhasil menambahkan user');
+            return back();
         } catch (\Throwable $th) {
-            return redirect()->route('admin.user.index')->with('error', 'User failed to create');
+            DB::rollBack(); // rollback transaction
+
+            if (app()->isProduction()) {
+                flash()->addError('Terjadi kesalahan pada server, coba lagi');
+                return back()->withInput();
+            } else {
+                throw $th;
+            }
         }
     }
 
@@ -61,7 +85,10 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        if(request()->ajax()){
+            $user = User::findOrFail($id);
+            return response()->json($user);
+        }
     }
 
     /**
@@ -69,7 +96,39 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'email|required|unique:users,email,'.$id,
+            'phone' => 'nullable',
+            'is_active' => 'required|boolean',
+        ]);
+
+        try {
+            DB::beginTransaction(); // begin transaction
+
+            // simpan user
+            $user = User::findOrFail($id);
+            $user->update([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone ?? null,
+                'is_active' => $request->is_active ?? false,
+            ]);
+
+            DB::commit(); // commit transaction
+
+            flash()->addSuccess('Berhasil mengubah user');
+            return back();
+        } catch (\Throwable $th) {
+            DB::rollBack(); // rollback transaction
+
+            if (app()->isProduction()) {
+                flash()->addError('Terjadi kesalahan pada server, coba lagi');
+                return back()->withInput();
+            } else {
+                throw $th;
+            }
+        }
     }
 
     /**
@@ -77,6 +136,27 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            DB::beginTransaction(); // begin transaction
+
+            $user = User::findOrFail($id);
+
+            // hapus user
+            $user->delete();
+
+            DB::commit(); // commit transaction
+
+            flash()->addSuccess('Berhasil menghapus user');
+            return back();
+        } catch (\Throwable $th) {
+            DB::rollBack(); // rollback transaction
+
+            if (app()->isProduction()) {
+                flash()->addError('Terjadi kesalahan pada server, coba lagi');
+                return back()->withInput();
+            } else {
+                throw $th;
+            }
+        }
     }
 }
